@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.aspect.validator.UserValidator;
 import com.example.demo.bean.User;
-import com.example.demo.service.impl.UserServiceImpl;
+
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -13,11 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     //注入服务信息
     @Autowired
-    private UserServiceImpl userService;
-//定义请求
+    private UserService userService;
+
+    //定义请求
     @RequestMapping("/print")
     @ResponseBody
-    public User printUser(String name,int age,String phone){
+    public User printUser(String name, int age, String phone) {
         User user = new User();
         user.setName(name);
         user.setPhone(phone);
@@ -26,4 +29,28 @@ public class UserController {
         return user;//加入断点
 
     }
+
+    @RequestMapping("/printUser")
+    @ResponseBody
+    public User validateAndPrint(String name, int age, String phone) {
+        User user = new User();
+        user.setAge(age);
+        user.setName(name);
+        user.setPhone(phone);
+        UserValidator userValidator =(UserValidator)userService;
+        if(userValidator.validate(user)){
+            userService.printUser(user);
+        }
+        return user;
+
+    }
+
+    @RequestMapping("/manyAspects")
+    @ResponseBody
+    public String manyAspects() {
+        userService.manyAspects();
+        return "manyAspects";
+    }
+
+
 }

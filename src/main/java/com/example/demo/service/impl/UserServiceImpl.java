@@ -9,12 +9,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void printUser(User user) {
-        if(user ==null){
+        if (user == null) {
             throw new RuntimeException("请检查用户参数是否为空！！！");
 
         }
-        System.out.println("name:"+user.getName());
-        System.out.println("age:"+user.getAge());
-        System.out.println("phone:"+user.getPhone());
+        System.out.println("name:" + user.getName());
+        System.out.println("age:" + user.getAge());
+        System.out.println("phone:" + user.getPhone());
+    }
+
+    @Override
+    public void manyAspects() {
+        System.out.println("测试多个切面");
+
     }
 }

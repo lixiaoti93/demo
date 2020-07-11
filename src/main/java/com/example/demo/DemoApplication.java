@@ -5,9 +5,11 @@ import com.example.demo.aspect.MyAspect1;
 import com.example.demo.aspect.MyAspect2;
 import com.example.demo.aspect.MyAspect3;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication(scanBasePackages = {"com.example.demo.*"})
 public class DemoApplication {
     //定义切面
